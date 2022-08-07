@@ -14,6 +14,23 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 class StudyTest {
 
     @Test
+    @FastTest
+//    @Tag("fast")
+    void fast_create() {
+        // TODO 메타 어노테이션을 활용
+
+        Study actual = new Study(100);
+    }
+
+    @Test
+    @SlowTest
+//    @Tag("slow")
+    void slow_create() {
+        Study actual = new Study(100);
+    }
+
+
+    @Test
     @DisplayName("Test 조건")
     @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_11})
     void assume() {
