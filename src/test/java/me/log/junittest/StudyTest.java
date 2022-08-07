@@ -1,13 +1,35 @@
 package me.log.junittest;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledOnJre;
+import org.junit.jupiter.api.condition.JRE;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 
 class StudyTest {
+
+    @Test
+    @DisplayName("Test 조건")
+    @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_11})
+    void assume() {
+        String test_env = System.getenv("TEST_ENV");
+        System.out.println(test_env);
+
+        assumeTrue("LOCAL".equalsIgnoreCase(test_env));
+
+        assumingThat("LOCAL".equalsIgnoreCase(test_env), () -> {
+            System.out.println("LOCAL");
+        });
+
+        assumingThat("STC".equalsIgnoreCase(test_env), () -> {
+            System.out.println("STC");
+        });
+    }
 
     @Test
     @DisplayName("스터디 Timeout")
