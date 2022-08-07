@@ -3,6 +3,8 @@ package me.log.junittest;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledOnJre;
 import org.junit.jupiter.api.condition.JRE;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Duration;
 
@@ -12,6 +14,19 @@ import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 
 class StudyTest {
+
+    @DisplayName("테스트 반복 파라미터")
+    @ParameterizedTest(name = "{index} {displayName} message={2}")
+    @ValueSource(strings = {"날씨가", "많이", "덥다"})
+    void parameter(String message) {
+        System.out.println(message);
+    }
+
+    @DisplayName("테스트 반복")
+    @RepeatedTest(value = 10, name = "{displayName}, {currentRepetition}/{totalRepetitions}")
+    void create_study(RepetitionInfo info) {
+        System.out.println("test " + info.getCurrentRepetition() + "/" + info.getTotalRepetitions());
+    }
 
     @Test
     @FastTest
@@ -92,31 +107,31 @@ class StudyTest {
     @Test
     @DisplayName("모든 Test 실행 전 1번만 호출")
     void create() {
-        System.out.println("create");
+//        System.out.println("create");
     }
 
     @DisplayName("모든 Test 실행 전 1번만 호출")
     @BeforeAll
     static void beforeAll() {
-        System.out.println("before all");
+//        System.out.println("before all");
     }
 
     @DisplayName("모든 Test 실행 후 1번만 호출")
     @AfterAll
     static void afterAll() {
-        System.out.println("after all");
+//        System.out.println("after all");
     }
 
     @DisplayName("각각의 Test 실행 전 1번만 호출")
     @BeforeEach
     void beforeEach() {
-        System.out.println("before each");
+//        System.out.println("before each");
     }
 
     @DisplayName("각각의 Test 실행 후 1번만 호출")
     @AfterEach
     void afterEach() {
-        System.out.println("after each");
+//        System.out.println("after each");
     }
 
 }
